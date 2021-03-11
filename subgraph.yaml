@@ -39,9 +39,6 @@ dataSources:
           handler: handleTokenBalanceSet
         - event: EthBalanceSet(indexed uint256,uint256)
           handler: handleEthBalanceSet
-      callHandlers:
-        - function:
-          handler:
       file: ./src/mapping.ts
 
   - kind: ethereum/contract
@@ -73,5 +70,7 @@ dataSources:
           handler: handleOwnershipTransferred
         - event: Redeem(uint256,uint256[],uint256,address)
           handler: handleRedeem
-        
+      callHandlers:
+        - function: createVault(address,address,bool)
+          handler: handleCreateVault
       file: ./src/mapping.ts

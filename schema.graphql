@@ -1,40 +1,24 @@
-type XToken @entity {
-  id: ID!
-  name: String!
-  address: Bytes
-  symbol: String
-  totalSupply: BigInt
-}
-
-type NFT @entity {
-  id: ID!
-  name: String
-  address: Bytes
-  symbol: String
-}
-
 type Vault @entity {
   id: ID!
-  asset: NFT
-  holdings: [NFT!]
-  xToken: XToken
   redeems: [RedeemEntity!]
   mints: [MintEntity!]
   tokenBalance: BigInt
   ethBalance: BigInt
+  xTokenAddress: Bytes
+  assetAddress: Bytes
 }
 
 type MintEntity @entity {
   id: ID!
-  vault: Vault
+  vaultId: String
   sender: Bytes
-  nftIds: [NFT!]
+  nftIds: [BigInt!]
 }
 
 type RedeemEntity @entity {
   id: ID!
-  vault: Vault
+  vaultId: String
   sender: Bytes
-  nftIds: [NFT!]
+  nftIds: [BigInt!]
 }
 
