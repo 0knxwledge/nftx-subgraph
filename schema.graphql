@@ -1,6 +1,40 @@
-type Gravatar @entity {
+type XToken @entity {
   id: ID!
-  owner: Bytes!
-  displayName: String!
-  imageUrl: String!
+  name: String!
+  address: Bytes
+  symbol: String
+  totalSupply: BigInt
 }
+
+type NFT @entity {
+  id: ID!
+  name: String
+  address: Bytes
+  symbol: String
+}
+
+type Vault @entity {
+  id: ID!
+  asset: NFT
+  holdings: [NFT!]
+  xToken: XToken
+  redeems: [RedeemEntity!]
+  mints: [MintEntity!]
+  tokenBalance: BigInt
+  ethBalance: BigInt
+}
+
+type MintEntity @entity {
+  id: ID!
+  vault: Vault
+  sender: Bytes
+  nftIds: [NFT!]
+}
+
+type RedeemEntity @entity {
+  id: ID!
+  vault: Vault
+  sender: Bytes
+  nftIds: [NFT!]
+}
+

@@ -1,27 +1,77 @@
 specVersion: 0.0.2
-description: Gravatar for Ethereum
-repository: https://github.com/graphprotocol/example-subgraph
+description: NFTX for Ethereum
+repository: https://github.com/0knxwledge/nftx-subgraph
 schema:
   file: ./schema.graphql
 dataSources:
   - kind: ethereum/contract
-    name: Gravity
+    name: XStore
     network: mainnet
     source:
-      address: '0x2E645469f354BB4F5c8a05B3b30A929361cf77eC'
-      abi: Gravity
+      address: '0xbe54738723cea167a76ad5421b50caa49692e7b7'
+      abi: XStore
+      startBlock: 11442019
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - Gravatar
+        - XToken
+        - NFT
+        - Vault
       abis:
-        - name: Gravity
-          file: ./abis/Gravity.json
+        - name: XStore
+          file: ./abis/xstore.json
       eventHandlers:
-        - event: NewGravatar(uint256,address,string,string)
-          handler: handleNewGravatar
-        - event: UpdatedGravatar(uint256,address,string,string)
-          handler: handleUpdatedGravatar
+        - event: XTokenSet(indexed uint256)
+          handler: handleXTokenSet
+        - event: XTokenAddressSet(indexed uint256,address)
+          handler: handleTokenAddressSet
+        - event: IsEligibleSet(indexed uint256,uint256,bool)
+          handler: handleIsEligibleSet
+        - event: NftAddressSet(indexed uint256,address)
+          handler: handleNftAddressSet
+        - event: NftSet(indexed uint256)
+          handler: handleNftSet
+        - event: NewVaultAdded(indexed uint256)
+          handler: handleNewVaultAdded
+        - event: TokenBalanceSet(indexed uint256,uint256)
+          handler: handleTokenBalanceSet
+        - event: EthBalanceSet(indexed uint256,uint256)
+          handler: handleEthBalanceSet
+      callHandlers:
+        - function:
+          handler:
+      file: ./src/mapping.ts
+
+  - kind: ethereum/contract
+    name: NFTX
+    network: mainnet
+    source:
+      address: '0xb67F19b92210Ca64c32DEFad5bED2898Cdd58aC4'
+      abi: NFTX
+      startBlock: 11683226
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - MintEntity
+        - RedeemEntity
+        - Vault
+      abis:
+        - name: NFTX
+          file: ./abis/nftx.json
+      eventHandlers:
+        - event: Mint(uint256,uint256[],uint256,address)
+          handler: handleMint
+        - event: MintRequested(uint256,uint256[],address)
+          handler: handleMintRequested
+        - event: NewVault(uint256,address)
+          handler: handleNewVault
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+        - event: Redeem(uint256,uint256[],uint256,address)
+          handler: handleRedeem
+        
       file: ./src/mapping.ts
