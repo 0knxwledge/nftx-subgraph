@@ -1,23 +1,21 @@
 type Vault @entity {
   id: ID!
-  redeems: [RedeemEntity!]
-  mints: [MintEntity!]
-  tokenBalance: BigInt
-  ethBalance: BigInt
   xTokenAddress: Bytes
   assetAddress: Bytes
+  redeems: [RedeemEntity!]! @derivedFrom(field: "vault")
+  mints: [MintEntity!]! @derivedFrom(field: "vault")
 }
 
 type MintEntity @entity {
   id: ID!
-  vaultId: String
-  sender: Bytes
+  vault: Vault!
+  sender: Bytes!
   nftIds: [BigInt!]
 }
 
 type RedeemEntity @entity {
   id: ID!
-  vaultId: String
-  sender: Bytes
+  vault: Vault!
+  sender: Bytes!
   nftIds: [BigInt!]
 }

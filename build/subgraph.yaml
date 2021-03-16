@@ -17,6 +17,8 @@ dataSources:
       language: wasm/assemblyscript
       entities:
         - Vault
+        - MintEntity
+        - RedeemEntity
       abis:
         - name: XStore
           file: XStore/abis/xstore.json
@@ -33,12 +35,12 @@ dataSources:
           handler: handleEthBalanceSet
       file: XStore/XStore.wasm
   - kind: ethereum/contract
-    name: NFTX
+    name: NFTXv7
     network: mainnet
     source:
-      address: "0xb67F19b92210Ca64c32DEFad5bED2898Cdd58aC4"
-      abi: NFTX
-      startBlock: 11683226
+      address: "0x3A2f04fAa1d39AcB088BecE5C2D6B00E81AFe868"
+      abi: NFTXv7
+      startBlock: 6175244
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
@@ -48,14 +50,14 @@ dataSources:
         - RedeemEntity
         - Vault
       abis:
-        - name: NFTX
-          file: NFTX/abis/nftx.json
+        - name: NFTXv7
+          file: NFTXv7/abis/nftxv7.json
       eventHandlers:
-        - event: Mint(uint256,uint256[],uint256,address)
+        - event: Mint(indexed uint256,uint256[],uint256,address)
           handler: handleMint
-        - event: NewVault(uint256,address)
+        - event: NewVault(indexed uint256,address)
           handler: handleNewVault
-        - event: Redeem(uint256,uint256[],uint256,address)
+        - event: Redeem(indexed uint256,uint256[],uint256,address)
           handler: handleRedeem
       callHandlers:
         - function: createVault(address,address,bool)

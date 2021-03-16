@@ -140,9 +140,9 @@ export class Redeem__Params {
   }
 }
 
-export class NFTX extends ethereum.SmartContract {
-  static bind(address: Address): NFTX {
-    return new NFTX("NFTX", address);
+export class NFTXv2 extends ethereum.SmartContract {
+  static bind(address: Address): NFTXv2 {
+    return new NFTXv2("NFTXv2", address);
   }
 
   _calcBounty(vaultId: BigInt, numTokens: BigInt, isBurn: boolean): BigInt {

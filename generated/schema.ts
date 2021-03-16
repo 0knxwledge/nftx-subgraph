@@ -42,74 +42,6 @@ export class Vault extends Entity {
     this.set("id", Value.fromString(value));
   }
 
-  get redeems(): Array<string> | null {
-    let value = this.get("redeems");
-    if (value === null || value.kind == ValueKind.NULL) {
-      return null;
-    } else {
-      return value.toStringArray();
-    }
-  }
-
-  set redeems(value: Array<string> | null) {
-    if (value === null) {
-      this.unset("redeems");
-    } else {
-      this.set("redeems", Value.fromStringArray(value as Array<string>));
-    }
-  }
-
-  get mints(): Array<string> | null {
-    let value = this.get("mints");
-    if (value === null || value.kind == ValueKind.NULL) {
-      return null;
-    } else {
-      return value.toStringArray();
-    }
-  }
-
-  set mints(value: Array<string> | null) {
-    if (value === null) {
-      this.unset("mints");
-    } else {
-      this.set("mints", Value.fromStringArray(value as Array<string>));
-    }
-  }
-
-  get tokenBalance(): BigInt | null {
-    let value = this.get("tokenBalance");
-    if (value === null || value.kind == ValueKind.NULL) {
-      return null;
-    } else {
-      return value.toBigInt();
-    }
-  }
-
-  set tokenBalance(value: BigInt | null) {
-    if (value === null) {
-      this.unset("tokenBalance");
-    } else {
-      this.set("tokenBalance", Value.fromBigInt(value as BigInt));
-    }
-  }
-
-  get ethBalance(): BigInt | null {
-    let value = this.get("ethBalance");
-    if (value === null || value.kind == ValueKind.NULL) {
-      return null;
-    } else {
-      return value.toBigInt();
-    }
-  }
-
-  set ethBalance(value: BigInt | null) {
-    if (value === null) {
-      this.unset("ethBalance");
-    } else {
-      this.set("ethBalance", Value.fromBigInt(value as BigInt));
-    }
-  }
-
   get xTokenAddress(): Bytes | null {
     let value = this.get("xTokenAddress");
     if (value === null || value.kind == ValueKind.NULL) {
@@ -143,6 +75,24 @@ export class Vault extends Entity {
       this.set("assetAddress", Value.fromBytes(value as Bytes));
     }
   }
+
+  get redeems(): Array<string> {
+    let value = this.get("redeems");
+    return value.toStringArray();
+  }
+
+  set redeems(value: Array<string>) {
+    this.set("redeems", Value.fromStringArray(value));
+  }
+
+  get mints(): Array<string> {
+    let value = this.get("mints");
+    return value.toStringArray();
+  }
+
+  set mints(value: Array<string>) {
+    this.set("mints", Value.fromStringArray(value));
+  }
 }
 
 export class MintEntity extends Entity {
@@ -175,38 +125,22 @@ export class MintEntity extends Entity {
     this.set("id", Value.fromString(value));
   }
 
-  get vaultId(): string | null {
-    let value = this.get("vaultId");
-    if (value === null || value.kind == ValueKind.NULL) {
-      return null;
-    } else {
-      return value.toString();
-    }
+  get vault(): string {
+    let value = this.get("vault");
+    return value.toString();
   }
 
-  set vaultId(value: string | null) {
-    if (value === null) {
-      this.unset("vaultId");
-    } else {
-      this.set("vaultId", Value.fromString(value as string));
-    }
+  set vault(value: string) {
+    this.set("vault", Value.fromString(value));
   }
 
-  get sender(): Bytes | null {
+  get sender(): Bytes {
     let value = this.get("sender");
-    if (value === null || value.kind == ValueKind.NULL) {
-      return null;
-    } else {
-      return value.toBytes();
-    }
+    return value.toBytes();
   }
 
-  set sender(value: Bytes | null) {
-    if (value === null) {
-      this.unset("sender");
-    } else {
-      this.set("sender", Value.fromBytes(value as Bytes));
-    }
+  set sender(value: Bytes) {
+    this.set("sender", Value.fromBytes(value));
   }
 
   get nftIds(): Array<BigInt> | null {
@@ -257,38 +191,22 @@ export class RedeemEntity extends Entity {
     this.set("id", Value.fromString(value));
   }
 
-  get vaultId(): string | null {
-    let value = this.get("vaultId");
-    if (value === null || value.kind == ValueKind.NULL) {
-      return null;
-    } else {
-      return value.toString();
-    }
+  get vault(): string {
+    let value = this.get("vault");
+    return value.toString();
   }
 
-  set vaultId(value: string | null) {
-    if (value === null) {
-      this.unset("vaultId");
-    } else {
-      this.set("vaultId", Value.fromString(value as string));
-    }
+  set vault(value: string) {
+    this.set("vault", Value.fromString(value));
   }
 
-  get sender(): Bytes | null {
+  get sender(): Bytes {
     let value = this.get("sender");
-    if (value === null || value.kind == ValueKind.NULL) {
-      return null;
-    } else {
-      return value.toBytes();
-    }
+    return value.toBytes();
   }
 
-  set sender(value: Bytes | null) {
-    if (value === null) {
-      this.unset("sender");
-    } else {
-      this.set("sender", Value.fromBytes(value as Bytes));
-    }
+  set sender(value: Bytes) {
+    this.set("sender", Value.fromBytes(value));
   }
 
   get nftIds(): Array<BigInt> | null {

@@ -140,9 +140,9 @@ export class Redeem__Params {
   }
 }
 
-export class NFTX extends ethereum.SmartContract {
-  static bind(address: Address): NFTX {
-    return new NFTX("NFTX", address);
+export class NFTXv6 extends ethereum.SmartContract {
+  static bind(address: Address): NFTXv6 {
+    return new NFTXv6("NFTXv6", address);
   }
 
   _calcBounty(vaultId: BigInt, numTokens: BigInt, isBurn: boolean): BigInt {
@@ -243,6 +243,49 @@ export class NFTX extends ethereum.SmartContract {
       "createVault(address,address,bool):(uint256)",
       [
         ethereum.Value.fromAddress(_xTokenAddress),
+        ethereum.Value.fromAddress(_assetAddress),
+        ethereum.Value.fromBoolean(_isD2Vault)
+      ]
+    );
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toBigInt());
+  }
+
+  createVault1(
+    name: string,
+    symbol: string,
+    _assetAddress: Address,
+    _isD2Vault: boolean
+  ): BigInt {
+    let result = super.call(
+      "createVault",
+      "createVault(string,string,address,bool):(uint256)",
+      [
+        ethereum.Value.fromString(name),
+        ethereum.Value.fromString(symbol),
+        ethereum.Value.fromAddress(_assetAddress),
+        ethereum.Value.fromBoolean(_isD2Vault)
+      ]
+    );
+
+    return result[0].toBigInt();
+  }
+
+  try_createVault1(
+    name: string,
+    symbol: string,
+    _assetAddress: Address,
+    _isD2Vault: boolean
+  ): ethereum.CallResult<BigInt> {
+    let result = super.tryCall(
+      "createVault",
+      "createVault(string,string,address,bool):(uint256)",
+      [
+        ethereum.Value.fromString(name),
+        ethereum.Value.fromString(symbol),
         ethereum.Value.fromAddress(_assetAddress),
         ethereum.Value.fromBoolean(_isD2Vault)
       ]
@@ -542,6 +585,52 @@ export class CreateVaultCall__Outputs {
   _call: CreateVaultCall;
 
   constructor(call: CreateVaultCall) {
+    this._call = call;
+  }
+
+  get value0(): BigInt {
+    return this._call.outputValues[0].value.toBigInt();
+  }
+}
+
+export class CreateVault1Call extends ethereum.Call {
+  get inputs(): CreateVault1Call__Inputs {
+    return new CreateVault1Call__Inputs(this);
+  }
+
+  get outputs(): CreateVault1Call__Outputs {
+    return new CreateVault1Call__Outputs(this);
+  }
+}
+
+export class CreateVault1Call__Inputs {
+  _call: CreateVault1Call;
+
+  constructor(call: CreateVault1Call) {
+    this._call = call;
+  }
+
+  get name(): string {
+    return this._call.inputValues[0].value.toString();
+  }
+
+  get symbol(): string {
+    return this._call.inputValues[1].value.toString();
+  }
+
+  get _assetAddress(): Address {
+    return this._call.inputValues[2].value.toAddress();
+  }
+
+  get _isD2Vault(): boolean {
+    return this._call.inputValues[3].value.toBoolean();
+  }
+}
+
+export class CreateVault1Call__Outputs {
+  _call: CreateVault1Call;
+
+  constructor(call: CreateVault1Call) {
     this._call = call;
   }
 

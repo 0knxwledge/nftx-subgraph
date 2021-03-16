@@ -17,6 +17,8 @@ dataSources:
       language: wasm/assemblyscript
       entities:
         - Vault
+        - MintEntity
+        - RedeemEntity
       abis:
         - name: XStore
           file: ./abis/xstore.json
@@ -34,12 +36,12 @@ dataSources:
       file: ./src/mapping.ts
 
   - kind: ethereum/contract
-    name: NFTX
+    name: NFTXv7
     network: mainnet
     source:
-      address: '0xb67F19b92210Ca64c32DEFad5bED2898Cdd58aC4'
-      abi: NFTX
-      startBlock: 11683226
+      address: '0x3A2f04fAa1d39AcB088BecE5C2D6B00E81AFe868'
+      abi: NFTXv7
+      startBlock: 6175244
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
@@ -49,16 +51,226 @@ dataSources:
         - RedeemEntity
         - Vault
       abis:
-        - name: NFTX
-          file: ./abis/nftx.json
+        - name: NFTXv7
+          file: ./abis/nftxv7.json
       eventHandlers:
-        - event: Mint(uint256,uint256[],uint256,address)
+        - event: Mint(indexed uint256,uint256[],uint256,address)
           handler: handleMint
-        - event: NewVault(uint256,address)
+        - event: NewVault(indexed uint256,address)
           handler: handleNewVault
-        - event: Redeem(uint256,uint256[],uint256,address)
+        - event: Redeem(indexed uint256,uint256[],uint256,address)
           handler: handleRedeem
       callHandlers:
         - function: createVault(address,address,bool)
           handler: handleCreateVault
       file: ./src/mapping.ts
+
+  # - kind: ethereum/contract
+  #   name: NFTXv7
+  #   network: mainnet
+  #   source:
+  #     address: '0x87665C29Ea77C4285ea7443F5f71C54Ea90305b8'
+  #     abi: NFTXv7
+  #     startBlock: 11992494
+  #   mapping:
+  #     kind: ethereum/events
+  #     apiVersion: 0.0.4
+  #     language: wasm/assemblyscript
+  #     entities:
+  #       - MintEntity
+  #       - RedeemEntity
+  #       - Vault
+  #     abis:
+  #       - name: NFTXv7
+  #         file: ./abis/nftxv7.json
+  #     eventHandlers:
+  #       - event: Mint(indexed uint256,uint256[],uint256,address)
+  #         handler: handleMint
+  #       - event: NewVault(indexed uint256,address)
+  #         handler: handleNewVault
+  #       - event: Redeem(indexed uint256,uint256[],uint256,address)
+  #         handler: handleRedeem
+  #     callHandlers:
+  #       - function: createVault(address,address,bool)
+  #         handler: handleCreateVault
+  #     file: ./src/mapping.ts
+  
+  # - kind: ethereum/contract
+  #   name: NFTXv6
+  #   network: mainnet
+  #   source:
+  #     address: '0xB4114fcCF310786d65CD43Fb330aaf25Bf12137A'
+  #     abi: NFTXv6
+  #     startBlock: 11954613
+  #   mapping:
+  #     kind: ethereum/events
+  #     apiVersion: 0.0.4
+  #     language: wasm/assemblyscript
+  #     entities:
+  #       - MintEntity
+  #       - RedeemEntity
+  #       - Vault
+  #     abis:
+  #       - name: NFTXv6
+  #         file: ./abis/nftxv6.json
+  #     eventHandlers:
+  #       - event: Mint(indexed uint256,uint256[],uint256,address)
+  #         handler: handleMint
+  #       - event: NewVault(indexed uint256,address)
+  #         handler: handleNewVault
+  #       - event: Redeem(indexed uint256,uint256[],uint256,address)
+  #         handler: handleRedeem
+  #     callHandlers:
+  #       - function: createVault(address,address,bool)
+  #         handler: handleCreateVault
+  #     file: ./src/mapping.ts
+
+  # - kind: ethereum/contract
+  #   name: NFTXv5
+  #   network: mainnet
+  #   source:
+  #     address: '0xb67F19b92210Ca64c32DEFad5bED2898Cdd58aC4'
+  #     abi: NFTXv5
+  #     startBlock: 11683226
+  #   mapping:
+  #     kind: ethereum/events
+  #     apiVersion: 0.0.4
+  #     language: wasm/assemblyscript
+  #     entities:
+  #       - MintEntity
+  #       - RedeemEntity
+  #       - Vault
+  #     abis:
+  #       - name: NFTXv5
+  #         file: ./abis/nftxv5.json
+  #     eventHandlers:
+  #       - event: Mint(indexed uint256,uint256[],uint256,address)
+  #         handler: handleMint
+  #       - event: NewVault(indexed uint256,address)
+  #         handler: handleNewVault
+  #       - event: Redeem(indexed uint256,uint256[],uint256,address)
+  #         handler: handleRedeem
+  #     callHandlers:
+  #       - function: createVault(address,address,bool)
+  #         handler: handleCreateVault
+  #     file: ./src/mapping.ts
+
+  # - kind: ethereum/contract
+  #   name: NFTXv4
+  #   network: mainnet
+  #   source:
+  #     address: '0x4D52E6451Aaf7AcD10a8c6102e354bdb482E7f4f'
+  #     abi: NFTXv4
+  #     startBlock: 11559644
+  #   mapping:
+  #     kind: ethereum/events
+  #     apiVersion: 0.0.4
+  #     language: wasm/assemblyscript
+  #     entities:
+  #       - MintEntity
+  #       - RedeemEntity
+  #       - Vault
+  #     abis:
+  #       - name: NFTXv4
+  #         file: ./abis/nftxv4.json
+  #     eventHandlers:
+  #       - event: Mint(indexed uint256,uint256[],uint256,address)
+  #         handler: handleMint
+  #       - event: NewVault(indexed uint256,address)
+  #         handler: handleNewVault
+  #       - event: Redeem(indexed uint256,uint256[],uint256,address)
+  #         handler: handleRedeem
+  #     callHandlers:
+  #       - function: createVault(address,address,bool)
+  #         handler: handleCreateVault
+  #     file: ./src/mapping.ts
+
+  # - kind: ethereum/contract
+  #   name: NFTXv3
+  #   network: mainnet
+  #   source:
+  #     address: '0xCf912DaFa570d6a97bd177B7B28e08097b1dc04D'
+  #     abi: NFTXv3
+  #     startBlock: 11499770
+  #   mapping:
+  #     kind: ethereum/events
+  #     apiVersion: 0.0.4
+  #     language: wasm/assemblyscript
+  #     entities:
+  #       - MintEntity
+  #       - RedeemEntity
+  #       - Vault
+  #     abis:
+  #       - name: NFTXv3
+  #         file: ./abis/nftxv3.json
+  #     eventHandlers:
+  #       - event: Mint(indexed uint256,uint256[],uint256,address)
+  #         handler: handleMint
+  #       - event: NewVault(indexed uint256,address)
+  #         handler: handleNewVault
+  #       - event: Redeem(indexed uint256,uint256[],uint256,address)
+  #         handler: handleRedeem
+  #     callHandlers:
+  #       - function: createVault(address,address,bool)
+  #         handler: handleCreateVault
+  #     file: ./src/mapping.ts
+
+  # - kind: ethereum/contract
+  #   name: NFTXv2
+  #   network: mainnet
+  #   source:
+  #     address: '0xeaF638B2ec38724B95B384127893dc938A59EC9F'
+  #     abi: NFTXv2
+  #     startBlock: 11499581
+  #   mapping:
+  #     kind: ethereum/events
+  #     apiVersion: 0.0.4
+  #     language: wasm/assemblyscript
+  #     entities:
+  #       - MintEntity
+  #       - RedeemEntity
+  #       - Vault
+  #     abis:
+  #       - name: NFTXv2
+  #         file: ./abis/nftxv2.json
+  #     eventHandlers:
+  #       - event: Mint(indexed uint256,uint256[],uint256,address)
+  #         handler: handleMint
+  #       - event: NewVault(indexed uint256,address)
+  #         handler: handleNewVault
+  #       - event: Redeem(indexed uint256,uint256[],uint256,address)
+  #         handler: handleRedeem
+  #     callHandlers:
+  #       - function: createVault(address,address,bool)
+  #         handler: handleCreateVault
+  #     file: ./src/mapping.ts
+
+  # - kind: ethereum/contract
+  #   name: NFTX
+  #   network: mainnet
+  #   source:
+  #     address: '0x3A2f04fAa1d39AcB088BecE5C2D6B00E81AFe868'
+  #     abi: NFTX
+  #     startBlock: 11441920
+  #   mapping:
+  #     kind: ethereum/events
+  #     apiVersion: 0.0.4
+  #     language: wasm/assemblyscript
+  #     entities:
+  #       - MintEntity
+  #       - RedeemEntity
+  #       - Vault
+  #     abis:
+  #       - name: NFTX
+  #         file: ./abis/nftx.json
+  #     eventHandlers:
+  #       - event: Mint(indexed uint256,uint256[],uint256,address)
+  #         handler: handleMint
+  #       - event: NewVault(indexed uint256,address)
+  #         handler: handleNewVault
+  #       - event: Redeem(indexed uint256,uint256[],uint256,address)
+  #         handler: handleRedeem
+  #     callHandlers:
+  #       - function: createVault(address,address,bool)
+  #         handler: handleCreateVault
+  #     file: ./src/mapping.ts
