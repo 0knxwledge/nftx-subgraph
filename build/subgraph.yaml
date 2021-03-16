@@ -2,13 +2,13 @@ specVersion: 0.0.2
 description: NFTX for Ethereum
 repository: https://github.com/0knxwledge/nftx-subgraph
 schema:
-  file: ./schema.graphql
+  file: schema.graphql
 dataSources:
   - kind: ethereum/contract
     name: XStore
     network: mainnet
     source:
-      address: '0xbe54738723cea167a76ad5421b50caa49692e7b7'
+      address: "0xbe54738723cea167a76ad5421b50caa49692e7b7"
       abi: XStore
       startBlock: 11442019
     mapping:
@@ -19,7 +19,7 @@ dataSources:
         - Vault
       abis:
         - name: XStore
-          file: ./abis/xstore.json
+          file: XStore/abis/xstore.json
       eventHandlers:
         - event: XTokenAddressSet(indexed uint256,address)
           handler: handleXTokenAddressSet
@@ -31,13 +31,12 @@ dataSources:
           handler: handleTokenBalanceSet
         - event: EthBalanceSet(indexed uint256,uint256)
           handler: handleEthBalanceSet
-      file: ./src/mapping.ts
-
+      file: XStore/XStore.wasm
   - kind: ethereum/contract
     name: NFTX
     network: mainnet
     source:
-      address: '0xb67F19b92210Ca64c32DEFad5bED2898Cdd58aC4'
+      address: "0xb67F19b92210Ca64c32DEFad5bED2898Cdd58aC4"
       abi: NFTX
       startBlock: 11683226
     mapping:
@@ -50,7 +49,7 @@ dataSources:
         - Vault
       abis:
         - name: NFTX
-          file: ./abis/nftx.json
+          file: NFTX/abis/nftx.json
       eventHandlers:
         - event: Mint(uint256,uint256[],uint256,address)
           handler: handleMint
@@ -61,4 +60,4 @@ dataSources:
       callHandlers:
         - function: createVault(address,address,bool)
           handler: handleCreateVault
-      file: ./src/mapping.ts
+      file: XStore/XStore.wasm
